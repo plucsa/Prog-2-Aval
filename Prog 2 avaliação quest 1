@@ -1,0 +1,76 @@
+'''Criado por : Pedro Lucas de Souza Rodrigues 
+e Iago de Souza Nogueira Penido'''
+
+from sys import stdin
+#O módulo sys fornece funções e variáveis usadas para manipular diferentes partes do ambiente de tempo de execução do Python
+
+
+def M_alternates(lista):
+    first_index = 0
+    second_index = 1
+    counter = 2
+    new_lista = list()
+    while(second_index <= len(lista)):
+        new_lista.append(lista[first_index:second_index])
+        first_index = second_index
+        second_index += counter
+        counter += 1
+    return new_lista
+
+#verificador numerico
+
+
+def numeric_checker(num):
+    acumulador = 0
+    counter = 1
+    while(acumulador <= num):
+        acumulador += counter
+        counter += 1
+        if(acumulador == num):
+            return True
+    return False
+
+
+def main():
+    num = None
+    while(num != ''):
+        num = stdin.readline().strip()
+        lista = stdin.readline().strip().split()
+        hashtag = stdin.readline().strip()
+        if num == '':
+            break
+
+        if(numeric_checker(int(num))):
+            lista = M_alternates(list(map(lambda e: int(e), lista)))
+            remainder = zero_e_um(lista[0][0])
+            answer = None
+            for e in lista:
+                for i in e:
+                    if(i % 2 == remainder):
+                        pass
+                    else:
+                        answer = 'NAO'
+                if remainder == 1:
+                    remainder = 0
+                else:
+                    remainder = 1
+            if answer:
+                print(answer)
+            else:
+                print(len(lista[-1]))
+
+        else:
+            print('NAO')
+        print(hashtag)
+
+
+def zero_e_um(first_element):
+    if(first_element % 2 == 0):
+        remainder = 0
+    else:
+        remainder = 1
+    return remainder
+
+
+if __name__ == '__main__':
+    main()
