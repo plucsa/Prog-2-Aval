@@ -5,12 +5,22 @@ from sys import stdin
 
 
 suffix = (('o', 'ei', 'ai'),
-                       ('os', 'es', 'ais'),
-                       ('a', 'e', 'i'),
-                       ('om', 'em', 'aem'),
-                       ('ons', 'est', 'aist'),
-                       ('am', 'im', 'aim'))
+         ('os', 'es', 'ais'),
+         ('a', 'e', 'i'),
+         ('om', 'em', 'aem'),
+         ('ons', 'est', 'aist'),
+         ('am', 'im', 'aim'))
 
+
+def person(word_suffix):
+    person = 1
+    for tupla in suffix:
+        if word_suffix in tupla:
+            break
+        else:
+            person += 1
+
+    return(str(person))
 
 def discover_suffi(palavra):
     word_limite = 4
@@ -35,33 +45,6 @@ def discover_suffi(palavra):
     return final_suffix, infinitive
 
 
-def person(word_suffix):
-    person = 1
-    for tupla in suffix:
-        if word_suffix in tupla:
-            break
-        else:
-            person += 1
-
-    return(str(person))
-
-
-def tempo(sulffix, person):
-    n_person = int(person)
-    tupla = suffix[n_person-1]
-    final_time = ''
-    if tupla[0] == sulffix:
-        final_time = 'presente'
-
-    elif tupla[1] == sulffix:
-        final_time = 'pretérito'
-
-    else:
-        final_time = 'futuro'
-
-    return final_time
-
-
 def main():
     line = stdin.readline().strip()
     while True:
@@ -80,6 +63,21 @@ def main():
                   infinitive, n_tempo, n_person))
 
         line = stdin.readline().strip()
+def tempo(sulffix, person):
+    n_person = int(person)
+    tupla = suffix[n_person-1]
+    final_time = ''
+    if tupla[0] == sulffix:
+        final_time = 'presente'
+
+    elif tupla[1] == sulffix:
+        final_time = 'pretérito'
+
+    else:
+        final_time = 'futuro'
+
+    return final_time
+
 
 
 if __name__ == '__main__':
